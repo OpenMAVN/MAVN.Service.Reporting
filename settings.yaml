@@ -1,0 +1,38 @@
+ReportService:
+  Db:
+    LogsConnString:
+      settings-key: ReportService-LogsConnString
+      types:
+        - AzureTableStorage
+    SqlDbConnString:
+      settings-key: ReportService-SqlDbConnString
+  Rabbit:
+    Subscribers:
+      ConnectionString:
+        settings-key: WalletManagementRabbitMQ
+        types:
+          - RabbitMq
+  IsPublicBlockchainFeatureDisabled:
+    settings-key: IsPublicBlockchainFeatureDisabled
+    types:
+      - Optional
+SlackNotifications:
+  AzureQueue:
+    ConnectionString:
+      settings-key: SlackNotificationsConnString
+      types:
+        - AzureTableStorage
+    QueueName:
+      settings-key: SlackQueueName
+MonitoringServiceClient:
+  MonitoringServiceUrl:
+    settings-key: MonitoringServiceUrl
+CustomerProfileService:
+  ServiceUrl:
+    settings-key: CustomerProfileServiceUrl
+PartnerManagementService:
+  ServiceUrl:
+    settings-key: PartnerManagementServiceUrl
+CampaignService:
+  ServiceUrl:
+    settings-key: CampaignServiceUrl
