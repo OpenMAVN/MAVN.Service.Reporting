@@ -20,7 +20,7 @@ namespace MAVN.Service.Reporting.MsSqlRepositories.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("Lykke.Service.Reporting.MsSqlRepositories.Entities.TransactionReportEntity", b =>
+            modelBuilder.Entity("MAVN.Service.Reporting.MsSqlRepositories.Entities.TransactionReportEntity", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
