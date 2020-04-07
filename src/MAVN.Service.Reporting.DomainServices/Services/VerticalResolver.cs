@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Concurrent;
 using System.Threading.Tasks;
 using Lykke.Service.Campaign.Client;
@@ -35,11 +35,11 @@ namespace MAVN.Service.Reporting.DomainServices.Services
 
             switch (bonusType.Vertical.Value)
             {
-                case PartnerManagement.Client.Models.Vertical.Hospitality:
+                case Lykke.Service.PartnerManagement.Client.Models.Vertical.Hospitality:
                     return Vertical.Hospitality;
-                case PartnerManagement.Client.Models.Vertical.RealEstate:
+                case Lykke.Service.PartnerManagement.Client.Models.Vertical.RealEstate:
                     return Vertical.RealEstate;
-                case PartnerManagement.Client.Models.Vertical.Retail:
+                case Lykke.Service.PartnerManagement.Client.Models.Vertical.Retail:
                     return Vertical.Retail;
                 default:
                     throw new ArgumentOutOfRangeException();
