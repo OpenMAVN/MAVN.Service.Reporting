@@ -1,0 +1,104 @@
+name: release
+
+on:
+  release:
+    types:
+      - published
+
+env:
+  RELEASE_CLIENT: true
+  RELEASE_CONTRACT: false
+  RELEASE_JOB: false
+  RELEASE_SERVICE: true
+  
+  CLIENT_PROJECT: ./client/MAVN.Service.Reporting.Client/MAVN.Service.Reporting.Client.csproj
+  CONTRACT_PROJECT: ./contract/MAVN.Service.Reporting.Contract/MAVN.Service.Reporting.Contract.csproj
+  JOB_DOCKER_IMAGE:
+  JOB_PROJECT:
+  SERVICE_DOCKER_IMAGE: reporting-service
+  SERVICE_PROJECT: ./src/MAVN.Service.Reporting/MAVN.Service.Reporting.csproj
+    
+  
+        
+jobs:
+  publish-release:
+
+    runs-on: ubuntu-latest
+    
+    steps:
+      - uses: actions/checkout@v2
+
+      # Set release version
+      - name: Get release version from tag
+        id: version
+        uses: LykkeBusiness/get-semver-from-tag-action@v1.0.2
+        with:
+          tag: ${{ github.ref }}
+      - name: Set version for release
+        uses: allenevans/set-env@v1.0.0
+        with:
+          VERSION: ${{ steps.version.outputs.non-prefixed }}
+
+      # Login to Docker Hub
+      - name: Login to docker hub
+        if: env.RELEASE_JOB == 'true' || env.RELEASE_SERVICE == 'true'
+        env:
+          DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+          DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+        run: docker login --username $DOCKER_USERNAME --password $DOCKER_PASSWORD
+
+      # Build solution      
+      - name: Setup .NET Core
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: 2.2.207
+      - name: Install dependencies
+        run: dotnet restore
+      - name: Build solution
+        run: dotnet build --configuration Release --no-restore /p:Version=$VERSION
+      
+      # Build Docker images
+      - name: Build docker image for a job
+        if: env.RELEASE_JOB == 'true'
+        run: |
+          dotnet publish $JOB_PROJECT --configuration Release --output ../../docker/job --no-build /p:Version=$VERSION
+          docker build --tag openmavn/$JOB_DOCKER_IMAGE:$VERSION ./docker/job
+      - name: Build docker image for a service
+        if: env.RELEASE_SERVICE == 'true'
+        run: |
+          dotnet publish $SERVICE_PROJECT --configuration Release --output ../../docker/service --no-build /p:Version=$VERSION
+          docker build --tag openmavn/$SERVICE_DOCKER_IMAGE:$VERSION ./docker/service
+      
+      # Pack NuGet packages
+      - name: Pack client NuGet package
+        if: env.RELEASE_CLIENT == 'true'
+        run: dotnet pack $CLIENT_PROJECT --configuration Release --output ../../packages --no-build --include-symbols --include-source /p:SymbolPackageFormat=snupkg /p:Version=$VERSION
+      - name: Pack contract NuGet package
+        if: env.RELEASE_CONTRACT == 'true'
+        run: dotnet pack $CONTRACT_PROJECT --configuration Release --output ../../packages --no-build --include-symbols --include-source /p:SymbolPackageFormat=snupkg /p:Version=$VERSION
+      
+      # Push Docker Images
+      - name: Push job docker image
+        if: env.RELEASE_JOB == 'true'
+        run: docker push openmavn/$JOB_DOCKER_IMAGE:$VERSION
+      - name: Push service docker image
+        if: env.RELEASE_SERVICE == 'true'
+        run: docker push openmavn/$SERVICE_DOCKER_IMAGE:$VERSION
+      
+      # Push NuGet packages
+      - name: Push NuGet packages
+        if: env.RELEASE_CLIENT == 'true' || env.RELEASE_CONTRACT == 'true'
+        env:
+          API_KEY: ${{ secrets.NUGET_ORG_API_KEY }}
+        run: dotnet nuget push ./packages/*.nupkg --source https://api.nuget.org/v3/index.json --api-key $API_KEY
+        
+      # Create next release draft
+      - name: Create next release draft
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: next
+          release_name: next
+          body:
+          draft: true
