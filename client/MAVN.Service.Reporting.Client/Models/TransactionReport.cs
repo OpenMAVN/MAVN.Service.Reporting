@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using Falcon.Numerics;
 using JetBrains.Annotations;
 

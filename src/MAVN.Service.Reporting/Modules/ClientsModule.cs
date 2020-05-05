@@ -1,7 +1,7 @@
-using Autofac;
+﻿using Autofac;
 using JetBrains.Annotations;
-using Lykke.Service.Campaign.Client;
-using Lykke.Service.CustomerProfile.Client;
+using MAVN.Service.Campaign.Client;
+using MAVN.Service.CustomerProfile.Client;
 using Lykke.Service.PartnerManagement.Client;
 using MAVN.Service.Reporting.Settings;
 using Lykke.SettingsReader;

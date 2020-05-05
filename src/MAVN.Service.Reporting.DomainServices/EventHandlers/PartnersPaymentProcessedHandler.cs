@@ -1,5 +1,5 @@
-using System.Threading.Tasks;
-using Lykke.Service.PartnersPayments.Contract;
+﻿using System.Threading.Tasks;
+using MAVN.Service.PartnersPayments.Contract;
 using MAVN.Service.Reporting.Domain;
 using MAVN.Service.Reporting.Domain.Repositories;
 using MAVN.Service.Reporting.Domain.Services;

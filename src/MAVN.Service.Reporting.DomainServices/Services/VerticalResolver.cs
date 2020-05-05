@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Concurrent;
 using System.Threading.Tasks;
-using Lykke.Service.Campaign.Client;
-using Lykke.Service.Campaign.Client.Models.BonusType;
+using MAVN.Service.Campaign.Client;
+using MAVN.Service.Campaign.Client.Models.BonusType;
 using MAVN.Service.Reporting.Domain;
 using MAVN.Service.Reporting.Domain.Services;
 

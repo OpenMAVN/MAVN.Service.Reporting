@@ -1,16 +1,15 @@
-using Autofac;
+﻿using Autofac;
 using JetBrains.Annotations;
 using Lykke.Common;
 using MAVN.Service.Reporting.DomainServices.RabbitSubscribers;
 using MAVN.Service.Reporting.Settings;
-using Lykke.Service.CrossChainTransfers.Contract;
-using Lykke.Service.PartnersPayments.Contract;
-using Lykke.Service.PaymentTransfers.Contract;
+using MAVN.Service.CrossChainTransfers.Contract;
+using MAVN.Service.PartnersPayments.Contract;
 using MAVN.Service.Reporting.Domain.Services;
 using MAVN.Service.Reporting.DomainServices.EventHandlers;
-using Lykke.Service.Staking.Contract.Events;
-using Lykke.Service.Vouchers.Contract;
-using Lykke.Service.WalletManagement.Contract.Events;
+using MAVN.Service.Staking.Contract.Events;
+using MAVN.Service.Vouchers.Contract;
+using MAVN.Service.WalletManagement.Contract.Events;
 using Lykke.SettingsReader;
 
 namespace MAVN.Service.Reporting.Modules
@@ -27,8 +26,6 @@ namespace MAVN.Service.Reporting.Modules
         private const string BonusReceivedExchangeName = "lykke.wallet.bonusreceived";
         private const string PartnersPaymentTokensReservedExchangeName = "lykke.wallet.partnerspaymenttokensreserved";
         private const string PartnersPaymentProcessedExchangeName = "lykke.wallet.partnerspaymentprocessed";
-        private const string PaymentTransferTokensReservedExchangeName = "lykke.wallet.transfertokensreserved";
-        private const string PaymentTransferProcessedExchangeName = "lykke.wallet.transferprocessed";
         private const string RefundPartnersPaymentExchangeName = "lykke.wallet.refundpartnerspayment";
         private const string RefundPaymentTransferExchangeName = "lykke.wallet.refundpaymenttransfer";
         private const string VoucherTokensReservedExchangeName = "lykke.wallet.vouchertokensreserved";
@@ -74,14 +71,6 @@ namespace MAVN.Service.Reporting.Modules
                 .As<IEventHandler<PartnersPaymentProcessedEvent>>()
                 .SingleInstance();
 
-            builder.RegisterType<PaymentTransferTokensReservedHandler>()
-                .As<IEventHandler<PaymentTransferTokensReservedEvent>>()
-                .SingleInstance();
-
-            builder.RegisterType<PaymentTransferProcessedHandler>()
-                .As<IEventHandler<PaymentTransferProcessedEvent>>()
-                .SingleInstance();
-
             builder.RegisterType<ReferralStakeReleasedHandler>()
                 .As<IEventHandler<ReferralStakeReleasedEvent>>()
                 .SingleInstance();
@@ -96,10 +85,6 @@ namespace MAVN.Service.Reporting.Modules
 
             builder.RegisterType<RefundPartnersPaymentHandler>()
                 .As<IEventHandler<RefundPartnersPaymentEvent>>()
-                .SingleInstance();
-
-            builder.RegisterType<RefundPaymentTransferHandler>()
-                .As<IEventHandler<RefundPaymentTransferEvent>>()
                 .SingleInstance();
 
             builder.RegisterType<TransferToExternalProcessedHandler>()
@@ -147,20 +132,6 @@ namespace MAVN.Service.Reporting.Modules
                 .SingleInstance()
                 .WithParameter("connectionString", _connString)
                 .WithParameter("exchangeName", PartnersPaymentProcessedExchangeName)
-                .WithParameter("queueName", DefaultQueueName);
-
-            builder.RegisterType<RabbitSubscriber<PaymentTransferTokensReservedEvent>>()
-                .As<IStartStop>()
-                .SingleInstance()
-                .WithParameter("connectionString", _connString)
-                .WithParameter("exchangeName", PaymentTransferTokensReservedExchangeName)
-                .WithParameter("queueName", DefaultQueueName);
-
-            builder.RegisterType<RabbitSubscriber<PaymentTransferProcessedEvent>>()
-                .As<IStartStop>()
-                .SingleInstance()
-                .WithParameter("connectionString", _connString)
-                .WithParameter("exchangeName", PaymentTransferProcessedExchangeName)
                 .WithParameter("queueName", DefaultQueueName);
 
             builder.RegisterType<RabbitSubscriber<RefundPartnersPaymentEvent>>()

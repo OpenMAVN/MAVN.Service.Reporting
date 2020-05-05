@@ -1,6 +1,4 @@
-using AutoMapper;
-using MAVN.Service.Reporting.Client;
-using MAVN.Service.Reporting.Domain;
+﻿using AutoMapper;
 using MAVN.Service.Reporting.MsSqlRepositories.Entities;
 
 namespace MAVN.Service.Reporting
