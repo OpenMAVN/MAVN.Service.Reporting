@@ -5,14 +5,15 @@
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="AutoMapper" Version="9.0.0" />
-    <PackageReference Include="Falcon.Service.Campaign.Client" Version="7.4.0" />
-    <PackageReference Include="Falcon.Service.CrossChainTransfers.Contract" Version="2.2.0" />
-    <PackageReference Include="Falcon.Service.CustomerProfile.Client" Version="7.7.0" />
-    <PackageReference Include="Falcon.Service.PartnerManagement.Client" Version="3.0.0" />
-    <PackageReference Include="Falcon.Service.Staking.Contract" Version="1.1.0" />
-    <PackageReference Include="Falcon.Service.Vouchers.Contract" Version="1.1.0" />
-    <PackageReference Include="Falcon.Service.WalletManagement.Contract" Version="3.8.0" />
     <PackageReference Include="Lykke.RabbitMqBroker" Version="7.13.1" />
+    <PackageReference Include="MAVN.Service.Campaign.Client" Version="1.0.1" />
+    <PackageReference Include="MAVN.Service.CrossChainTransfers.Contract" Version="1.0.1" />
+    <PackageReference Include="MAVN.Service.CustomerManagement.Client" Version="1.0.1" />
+    <PackageReference Include="MAVN.Service.CustomerProfile.Client" Version="1.2.0" />
+    <PackageReference Include="MAVN.Service.PartnerManagement.Client" Version="1.0.4" />
+    <PackageReference Include="MAVN.Service.Staking.Contract" Version="1.0.1" />
+    <PackageReference Include="MAVN.Service.Vouchers.Contract" Version="1.0.1" />
+    <PackageReference Include="MAVN.Service.WalletManagement.Contract" Version="1.0.1" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\MAVN.Service.Reporting.Domain\MAVN.Service.Reporting.Domain.csproj" />
