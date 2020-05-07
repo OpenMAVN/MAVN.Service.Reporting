@@ -58,9 +58,13 @@ namespace MAVN.Service.Reporting.MsSqlRepositories.Repositories
             {
                 var shouldFilterByPartners = partnerIds != null && partnerIds.Any();
 
-                var reports = await context.TransactionReports
-                    .Where(t => !shouldFilterByPartners || partnerIds.Contains(t.PartnerId))
-                    .Where(t => from <= t.Timestamp && t.Timestamp <= to )
+                var query = context.TransactionReports
+                    .Where(t => from <= t.Timestamp && t.Timestamp <= to);
+
+                if (shouldFilterByPartners)
+                    query = query.Where(t => partnerIds.Contains(t.PartnerId));
+
+                var reports = await query
                     .OrderByDescending(t => t.Timestamp)
                     .Skip(skip)
                     .Take(take)
@@ -79,9 +83,13 @@ namespace MAVN.Service.Reporting.MsSqlRepositories.Repositories
             {
                 var shouldFilterByPartners = partnerIds != null && partnerIds.Any();
 
-                var reports = await context.TransactionReports
-                    .Where(t => !shouldFilterByPartners || partnerIds.Contains(t.PartnerId))
-                    .Where(t => from <= t.Timestamp && t.Timestamp <= to )
+                var query = context.TransactionReports
+                    .Where(t => from <= t.Timestamp && t.Timestamp <= to);
+
+                if(shouldFilterByPartners)
+                    query = query.Where(t => partnerIds.Contains(t.PartnerId));
+
+                var reports = await query
                     .OrderByDescending(t => t.Timestamp)
                     .Take(limit)
                     .Select(report => _mapper.Map<TransactionReport>(report))
