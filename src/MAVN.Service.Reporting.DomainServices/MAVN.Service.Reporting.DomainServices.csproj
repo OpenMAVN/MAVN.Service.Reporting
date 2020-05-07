@@ -11,6 +11,8 @@
     <PackageReference Include="MAVN.Service.CustomerManagement.Client" Version="1.0.1" />
     <PackageReference Include="MAVN.Service.CustomerProfile.Client" Version="1.2.0" />
     <PackageReference Include="MAVN.Service.PartnerManagement.Client" Version="1.0.4" />
+    <PackageReference Include="MAVN.Service.SmartVouchers.Client" Version="1.10.0" />
+    <PackageReference Include="MAVN.Service.SmartVouchers.Contract" Version="1.10.0" />
     <PackageReference Include="MAVN.Service.Staking.Contract" Version="1.0.1" />
     <PackageReference Include="MAVN.Service.Vouchers.Contract" Version="1.0.1" />
     <PackageReference Include="MAVN.Service.WalletManagement.Contract" Version="1.0.1" />

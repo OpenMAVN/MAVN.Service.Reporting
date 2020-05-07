@@ -11,6 +11,7 @@ using MAVN.Service.Staking.Contract.Events;
 using MAVN.Service.Vouchers.Contract;
 using MAVN.Service.WalletManagement.Contract.Events;
 using Lykke.SettingsReader;
+using MAVN.Service.SmartVouchers.Contract;
 
 namespace MAVN.Service.Reporting.Modules
 {
@@ -27,12 +28,12 @@ namespace MAVN.Service.Reporting.Modules
         private const string PartnersPaymentTokensReservedExchangeName = "lykke.wallet.partnerspaymenttokensreserved";
         private const string PartnersPaymentProcessedExchangeName = "lykke.wallet.partnerspaymentprocessed";
         private const string RefundPartnersPaymentExchangeName = "lykke.wallet.refundpartnerspayment";
-        private const string RefundPaymentTransferExchangeName = "lykke.wallet.refundpaymenttransfer";
         private const string VoucherTokensReservedExchangeName = "lykke.wallet.vouchertokensreserved";
         private const string VoucherTokensUsedExchangeName = "lykke.wallet.vouchertokensused";
         private const string ReferralStakeReservedExchange = "lykke.wallet.referralstakereserved";
         private const string ReferralStakeReleasedExchange = "lykke.wallet.referralstakereleased";
         private const string ReferralStakeBurntExchange = "lykke.wallet.referralstakeburnt";
+        private const string SmartVoucherSoldExchange = "lykke.smart-vouchers.vouchersold";
 
         private readonly string _connString;
         private readonly bool _isPublicBlockchainFeatureDisabled;
@@ -102,6 +103,10 @@ namespace MAVN.Service.Reporting.Modules
             builder.RegisterType<VoucherTokensProcessedHandler>()
                 .As<IEventHandler<VoucherTokensUsedEvent>>()
                 .SingleInstance();
+
+            builder.RegisterType<SmartVoucherSoldHandler>()
+                .As<IEventHandler<SmartVoucherSoldEvent>>()
+                .SingleInstance();
         }
 
         private void RegisterRabbitMqSubscribers(ContainerBuilder builder)
@@ -141,13 +146,6 @@ namespace MAVN.Service.Reporting.Modules
                 .WithParameter("exchangeName", RefundPartnersPaymentExchangeName)
                 .WithParameter("queueName", DefaultQueueName);
 
-            builder.RegisterType<RabbitSubscriber<RefundPaymentTransferEvent>>()
-                .As<IStartStop>()
-                .SingleInstance()
-                .WithParameter("connectionString", _connString)
-                .WithParameter("exchangeName", RefundPaymentTransferExchangeName)
-                .WithParameter("queueName", DefaultQueueName);
-
             builder.RegisterType<RabbitSubscriber<ReferralStakeReleasedEvent>>()
                 .As<IStartStop>()
                 .SingleInstance()
@@ -181,6 +179,13 @@ namespace MAVN.Service.Reporting.Modules
                 .SingleInstance()
                 .WithParameter("connectionString", _connString)
                 .WithParameter("exchangeName", VoucherTokensUsedExchangeName)
+                .WithParameter("queueName", DefaultQueueName);
+
+            builder.RegisterType<RabbitSubscriber<SmartVoucherSoldEvent>>()
+                .As<IStartStop>()
+                .SingleInstance()
+                .WithParameter("connectionString", _connString)
+                .WithParameter("exchangeName", SmartVoucherSoldExchange)
                 .WithParameter("queueName", DefaultQueueName);
 
             if (!_isPublicBlockchainFeatureDisabled)

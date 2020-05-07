@@ -36,3 +36,6 @@ PartnerManagementService:
 CampaignService:
   ServiceUrl:
     settings-key: CampaignServiceUrl
+SmartVouchersService:
+  ServiceUrl:
+    settings-key: SmartVouchersServiceUrl

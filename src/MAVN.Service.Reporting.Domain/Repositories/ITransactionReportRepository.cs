@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using MAVN.Service.Reporting.Domain.Models;
@@ -15,12 +15,14 @@ namespace MAVN.Service.Reporting.Domain.Repositories
             int skip,
             int take,
             DateTime from,
-            DateTime to);
+            DateTime to,
+            string[] partnerIds);
 
         Task<IReadOnlyList<TransactionReport>> GetLimitedAsync(
             DateTime from,
             DateTime to,
-            int limit
+            int limit,
+            string[] partnerIds
         );
     }
 }

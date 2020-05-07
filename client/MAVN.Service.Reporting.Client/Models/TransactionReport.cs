@@ -56,5 +56,11 @@ namespace MAVN.Service.Reporting.Client.Models
 
         /// <summary>Location integration code</summary>
         [CanBeNull] public string LocationIntegrationCode { get; set; }
+
+        /// <summary>Partner Id</summary>
+        [CanBeNull] public string PartnerId { get; set; }
+
+        /// <summary>Currency</summary>
+        [CanBeNull] public string Currency { get; set; }
     }
 }
