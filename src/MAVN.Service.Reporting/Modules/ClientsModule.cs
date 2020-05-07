@@ -5,6 +5,7 @@ using MAVN.Service.CustomerProfile.Client;
 using Lykke.Service.PartnerManagement.Client;
 using MAVN.Service.Reporting.Settings;
 using Lykke.SettingsReader;
+using MAVN.Service.SmartVouchers.Client;
 
 namespace MAVN.Service.Reporting.Modules
 {
@@ -23,6 +24,7 @@ namespace MAVN.Service.Reporting.Modules
             builder.RegisterCustomerProfileClient(_appSettings.CustomerProfileService);
             builder.RegisterPartnerManagementClient(_appSettings.PartnerManagementService);
             builder.RegisterCampaignClient(_appSettings.CampaignService);
+            builder.RegisterSmartVouchersClient(_appSettings.SmartVouchersService, null);
         }
     }
 }

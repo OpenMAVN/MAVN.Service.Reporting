@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -52,11 +52,14 @@ namespace MAVN.Service.Reporting.MsSqlRepositories.Repositories
 
         public async Task<IReadOnlyList<TransactionReport>> GetPaginatedAsync(
             int skip, int take,
-            DateTime from, DateTime to)
+            DateTime from, DateTime to, string[] partnerIds)
         {
             using (var context = _contextFactory.CreateDataContext())
             {
+                var shouldFilterByPartners = partnerIds != null && partnerIds.Any();
+
                 var reports = await context.TransactionReports
+                    .Where(t => !shouldFilterByPartners || partnerIds.Contains(t.PartnerId))
                     .Where(t => from <= t.Timestamp && t.Timestamp <= to )
                     .OrderByDescending(t => t.Timestamp)
                     .Skip(skip)
@@ -69,12 +72,15 @@ namespace MAVN.Service.Reporting.MsSqlRepositories.Repositories
         }
 
         public async Task<IReadOnlyList<TransactionReport>> GetLimitedAsync(
-            DateTime from, DateTime to, int limit
+            DateTime from, DateTime to, int limit, string[] partnerIds
         )
         {
             using (var context = _contextFactory.CreateDataContext())
             {
+                var shouldFilterByPartners = partnerIds != null && partnerIds.Any();
+
                 var reports = await context.TransactionReports
+                    .Where(t => !shouldFilterByPartners || partnerIds.Contains(t.PartnerId))
                     .Where(t => from <= t.Timestamp && t.Timestamp <= to )
                     .OrderByDescending(t => t.Timestamp)
                     .Take(limit)

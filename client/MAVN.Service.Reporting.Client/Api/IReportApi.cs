@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.ComponentModel.DataAnnotations;
 using System.Threading.Tasks;
 using JetBrains.Annotations;
@@ -19,7 +19,7 @@ namespace MAVN.Service.Reporting.Client.Api {
         /// <param name="pagingInfo"></param>
         /// <returns></returns>
         [Get("/api/report")]
-        Task<PaginatedReportResult> FetchReportAsync([Query] TransactionReportByTimeRequest pagingInfo);
+        Task<PaginatedReportResult> FetchReportAsync([Query] TransactionReportByTimeRequest pagingInfo, string[] partnerIds);
 
         /// <summary>
         /// Csv Report for transactions
@@ -28,6 +28,6 @@ namespace MAVN.Service.Reporting.Client.Api {
         /// <param name="to"></param>
         /// <returns></returns>
         [Get("/api/report/csv")]
-        Task<CsvFileReportResult> FetchReportCsvAsync([Query] [Required] DateTime from, [Query] [Required] DateTime to);
+        Task<CsvFileReportResult> FetchReportCsvAsync([Query] [Required] DateTime from, [Query] [Required] DateTime to, string[] partnerIds);
     }
 }

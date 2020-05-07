@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Falcon.Numerics;
@@ -69,5 +69,13 @@ namespace MAVN.Service.Reporting.MsSqlRepositories.Entities
         [Column("location_integration_code")]
         [CanBeNull]
         public string LocationIntegrationCode { get; set; }
+
+        [Column("partner_id")]
+        [CanBeNull]
+        public string PartnerId { get; set; }
+
+        [Column("currency")]
+        [CanBeNull]
+        public string Currency { get; set; }
     }
 }

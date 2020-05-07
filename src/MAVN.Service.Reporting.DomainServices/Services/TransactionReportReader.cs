@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using MAVN.Service.Reporting.Domain.Models;
@@ -19,11 +19,11 @@ namespace MAVN.Service.Reporting.DomainServices.Services
 
         public async Task<TransactionReportResult> GetPaginatedAsync(
             int currentPage, int pageSize,
-            DateTime from, DateTime to)
+            DateTime from, DateTime to, string[] partnerIds)
         {
             var (skip, take) = PagingUtils.GetNextPageParameters(currentPage, pageSize);
 
-            var reports = await _transactionReportRepository.GetPaginatedAsync(skip, take, from, to);
+            var reports = await _transactionReportRepository.GetPaginatedAsync(skip, take, from, to, partnerIds);
 
             return new TransactionReportResult
             {
@@ -35,11 +35,11 @@ namespace MAVN.Service.Reporting.DomainServices.Services
         }
 
         public async Task<IReadOnlyList<TransactionReport>> GetLimitedAsync(
-            DateTime from, DateTime to, int limit)
+            DateTime from, DateTime to, int limit, string[] partnerIds)
         {
             if (limit <= 0) throw new ArgumentException();
 
-            var reports = await _transactionReportRepository.GetLimitedAsync(from, to, limit);
+            var reports = await _transactionReportRepository.GetLimitedAsync(from, to, limit, partnerIds);
             return reports;
         }
     }
