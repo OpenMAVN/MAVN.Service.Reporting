@@ -35,7 +35,7 @@ namespace MAVN.Service.Reporting.Controllers
         [HttpGet("report")]
         [ProducesResponseType(typeof(PaginatedReportResult), (int)HttpStatusCode.OK)]
         public async Task<PaginatedReportResult> FetchReportAsync(
-            [FromQuery] TransactionReportByTimeRequest pagingInfo, string[] partnerIds)
+            [FromQuery] TransactionReportByTimeRequest pagingInfo, [FromQuery] string[] partnerIds)
         {
             var result = await _reportReader.GetPaginatedAsync(
                 pagingInfo.CurrentPage, pagingInfo.PageSize,
@@ -52,7 +52,7 @@ namespace MAVN.Service.Reporting.Controllers
         /// <returns></returns>
         [HttpGet("report/csv")]
         [ProducesResponseType(typeof(CsvFileReportResult), (int) HttpStatusCode.OK)]
-        public async Task<CsvFileReportResult> FetchReportCsvAsync([FromQuery] [Required] DateTime from, [FromQuery] [Required] DateTime to, string[] partnerIds)
+        public async Task<CsvFileReportResult> FetchReportCsvAsync([FromQuery] [Required] DateTime from, [FromQuery] [Required] DateTime to, [FromQuery] string[] partnerIds)
         {
             var reports = await _reportReader.GetLimitedAsync(from, to, Constants.LimitOfReports, partnerIds);
             var result = CsvConverter.Run(reports);
