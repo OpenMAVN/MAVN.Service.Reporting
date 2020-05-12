@@ -2,7 +2,7 @@
 using JetBrains.Annotations;
 using MAVN.Service.Campaign.Client;
 using MAVN.Service.CustomerProfile.Client;
-using Lykke.Service.PartnerManagement.Client;
+using MAVN.Service.PartnerManagement.Client;
 using MAVN.Service.Reporting.Settings;
 using Lykke.SettingsReader;
 using MAVN.Service.SmartVouchers.Client;

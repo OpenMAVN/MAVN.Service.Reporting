@@ -2,7 +2,7 @@
 using Lykke.Sdk.Settings;
 using MAVN.Service.Campaign.Client;
 using MAVN.Service.CustomerProfile.Client;
-using Lykke.Service.PartnerManagement.Client;
+using MAVN.Service.PartnerManagement.Client;
 using MAVN.Service.SmartVouchers.Client;
 
 namespace MAVN.Service.Reporting.Settings

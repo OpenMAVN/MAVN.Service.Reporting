@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
-using Falcon.Numerics;
-using Lykke.Service.PartnerManagement.Client;
+using MAVN.Numerics;
+using MAVN.Service.PartnerManagement.Client;
 using MAVN.Service.CustomerProfile.Client;
 using MAVN.Service.Reporting.Domain.Models;
 using MAVN.Service.Reporting.Domain.Repositories;

@@ -14,9 +14,9 @@
     <None Remove="$(AssemblyName).xml" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Falcon.Numerics" Version="0.1.1" />
     <PackageReference Include="Lykke.HttpClientGenerator" Version="2.5.0" />
     <PackageReference Include="Lykke.SettingsReader" Version="5.2.0" />
+    <PackageReference Include="MAVN.Numerics" Version="1.0.0" />
     <PackageReference Include="Refit" Version="4.6.107" />
   </ItemGroup>
 </Project>
