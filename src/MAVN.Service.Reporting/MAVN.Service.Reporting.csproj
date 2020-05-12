@@ -20,7 +20,7 @@
   <ItemGroup>
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="7.0.0" />
     <PackageReference Include="Lykke.Sdk" Version="5.17.0" />
-    <PackageReference Include="MAVN.Job.QuorumTransactionWatcher.Contract" Version="1.0.1" />
+    <PackageReference Include="MAVN.Job.QuorumTransactionWatcher.Contract" Version="1.1.0" />
     <PackageReference Include="Microsoft.ApplicationInsights.AspNetCore" Version="2.13.1" />
   </ItemGroup>
   <ItemGroup>

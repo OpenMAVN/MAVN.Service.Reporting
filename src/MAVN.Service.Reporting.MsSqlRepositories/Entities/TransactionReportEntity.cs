@@ -1,7 +1,7 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using Falcon.Numerics;
+using MAVN.Numerics;
 using JetBrains.Annotations;
 
 namespace MAVN.Service.Reporting.MsSqlRepositories.Entities

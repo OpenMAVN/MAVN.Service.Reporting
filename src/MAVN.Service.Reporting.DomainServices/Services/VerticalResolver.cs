@@ -35,11 +35,11 @@ namespace MAVN.Service.Reporting.DomainServices.Services
 
             switch (bonusType.Vertical.Value)
             {
-                case Lykke.Service.PartnerManagement.Client.Models.Vertical.Hospitality:
+                case MAVN.Service.PartnerManagement.Client.Models.Vertical.Hospitality:
                     return Vertical.Hospitality;
-                case Lykke.Service.PartnerManagement.Client.Models.Vertical.RealEstate:
+                case MAVN.Service.PartnerManagement.Client.Models.Vertical.RealEstate:
                     return Vertical.RealEstate;
-                case Lykke.Service.PartnerManagement.Client.Models.Vertical.Retail:
+                case MAVN.Service.PartnerManagement.Client.Models.Vertical.Retail:
                     return Vertical.Retail;
                 default:
                     throw new ArgumentOutOfRangeException();

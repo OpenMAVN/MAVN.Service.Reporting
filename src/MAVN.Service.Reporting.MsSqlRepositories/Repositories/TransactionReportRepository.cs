@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
-using Lykke.Common.MsSql;
+using MAVN.Common.MsSql;
 using MAVN.Service.Reporting.Domain;
 using MAVN.Service.Reporting.Domain.Models;
 using MAVN.Service.Reporting.Domain.Repositories;
