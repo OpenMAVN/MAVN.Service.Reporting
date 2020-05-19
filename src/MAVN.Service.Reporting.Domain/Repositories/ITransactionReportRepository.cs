@@ -16,13 +16,16 @@ namespace MAVN.Service.Reporting.Domain.Repositories
             int take,
             DateTime from,
             DateTime to,
-            string[] partnerIds);
+            string[] partnerIds,
+            string transactionType,
+            string status);
 
         Task<IReadOnlyList<TransactionReport>> GetLimitedAsync(
             DateTime from,
             DateTime to,
             int limit,
-            string[] partnerIds
-        );
+            string[] partnerIds,
+            string transactionType,
+            string status);
     }
 }
