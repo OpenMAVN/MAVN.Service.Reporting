@@ -32,21 +32,15 @@ namespace MAVN.Service.Reporting.Controllers
         /// </summary>
         /// <param name="pagingInfo">The paging information</param>
         /// <param name="partnerIds"></param>
-        /// <param name="transactionType">Optional</param>
-        /// <param name="status">Optional</param>
         /// <returns></returns>
         [HttpGet("report")]
         [ProducesResponseType(typeof(PaginatedReportResult), (int)HttpStatusCode.OK)]
-        public async Task<PaginatedReportResult> FetchReportAsync(
-            [FromQuery] TransactionReportByTimeRequest pagingInfo,
-            [FromQuery] string[] partnerIds,
-            [FromQuery] string transactionType = null,
-            [FromQuery] string status = null)
+        public async Task<PaginatedReportResult> FetchReportAsync([FromQuery] TransactionReportByTimeRequest pagingInfo, [FromQuery] string[] partnerIds)
         {
             var result = await _reportReader.GetPaginatedAsync(
                 pagingInfo.CurrentPage, pagingInfo.PageSize,
                 pagingInfo.From, pagingInfo.To, partnerIds,
-                transactionType, status);
+                pagingInfo.TransactionType, pagingInfo.Status);
 
             return _mapper.Map<PaginatedReportResult>(result);
         }
@@ -54,24 +48,16 @@ namespace MAVN.Service.Reporting.Controllers
         /// <summary>
         /// Get Csv file of transaction infos
         /// </summary>
-        /// <param name="from"></param>
-        /// <param name="to"></param>
+        /// <param name="pagingInfo"></param>
         /// <param name="partnerIds"></param>
-        /// <param name="transactionType">Optional</param>
-        /// <param name="status">Optional</param>
         /// <returns></returns>
         [HttpGet("report/csv")]
         [ProducesResponseType(typeof(CsvFileReportResult), (int)HttpStatusCode.OK)]
-        public async Task<CsvFileReportResult> FetchReportCsvAsync(
-            [FromQuery] [Required] DateTime from,
-            [FromQuery] [Required] DateTime to,
-            [FromQuery] string[] partnerIds,
-            [FromQuery] string transactionType = null,
-            [FromQuery] string status = null)
+        public async Task<CsvFileReportResult> FetchReportCsvAsync([FromQuery] TransactionReportByTimeRequest pagingInfo, [FromQuery] string[] partnerIds)
         {
             var reports = await _reportReader.GetLimitedAsync(
-                from, to, Constants.LimitOfReports,
-                partnerIds, transactionType, status);
+                pagingInfo.From, pagingInfo.To, Constants.LimitOfReports,
+                partnerIds, pagingInfo.TransactionType, pagingInfo.Status);
             var result = CsvConverter.Run(reports);
 
             return new CsvFileReportResult

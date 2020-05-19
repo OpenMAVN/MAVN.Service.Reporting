@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.ComponentModel.DataAnnotations;
 
 namespace MAVN.Service.Reporting.Client.Models
@@ -12,12 +12,22 @@ namespace MAVN.Service.Reporting.Client.Models
         /// From
         /// </summary>
         [Required]
-        public DateTime From { get; set; }        
-        
+        public DateTime From { get; set; }
+
         /// <summary>
         /// To
         /// </summary>
         [Required]
         public DateTime To { get; set; }
+
+        /// <summary>
+        /// TransactionType
+        /// </summary>
+        public string TransactionType { get; set; }
+
+        /// <summary>
+        /// Status
+        /// </summary>
+        public string Status { get; set; }
     }
 }
