@@ -106,10 +106,10 @@ namespace MAVN.Service.Reporting.MsSqlRepositories.Repositories
             if (shouldFilterByPartners)
                 query = query.Where(t => partnerIds.Contains(t.PartnerId));
 
-            if (transactionType != null)
+            if (!string.IsNullOrEmpty(transactionType))
                 query = query.Where(t => t.TransactionType == transactionType);
 
-            if (status != null)
+            if (!string.IsNullOrEmpty(status))
                 query = query.Where(t => t.Status == status);
 
             return query;
