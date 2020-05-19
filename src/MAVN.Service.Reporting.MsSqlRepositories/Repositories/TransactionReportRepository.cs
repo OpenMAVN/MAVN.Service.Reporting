@@ -51,18 +51,14 @@ namespace MAVN.Service.Reporting.MsSqlRepositories.Repositories
         }
 
         public async Task<IReadOnlyList<TransactionReport>> GetPaginatedAsync(
-            int skip, int take,
-            DateTime from, DateTime to, string[] partnerIds)
+            int skip, int take, DateTime from, DateTime to, string[] partnerIds,
+            string transactionType, string status)
         {
             using (var context = _contextFactory.CreateDataContext())
             {
-                var shouldFilterByPartners = partnerIds != null && partnerIds.Any();
+                var query = GetQuery(context, from, to);
 
-                var query = context.TransactionReports
-                    .Where(t => from <= t.Timestamp && t.Timestamp <= to);
-
-                if (shouldFilterByPartners)
-                    query = query.Where(t => partnerIds.Contains(t.PartnerId));
+                query = AddFiltersToQuery(query, partnerIds, transactionType, status);
 
                 var reports = await query
                     .OrderByDescending(t => t.Timestamp)
@@ -76,18 +72,14 @@ namespace MAVN.Service.Reporting.MsSqlRepositories.Repositories
         }
 
         public async Task<IReadOnlyList<TransactionReport>> GetLimitedAsync(
-            DateTime from, DateTime to, int limit, string[] partnerIds
-        )
+            DateTime from, DateTime to, int limit, string[] partnerIds,
+            string transactionType, string status)
         {
             using (var context = _contextFactory.CreateDataContext())
             {
-                var shouldFilterByPartners = partnerIds != null && partnerIds.Any();
+                var query = GetQuery(context, from, to);
 
-                var query = context.TransactionReports
-                    .Where(t => from <= t.Timestamp && t.Timestamp <= to);
-
-                if(shouldFilterByPartners)
-                    query = query.Where(t => partnerIds.Contains(t.PartnerId));
+                query = AddFiltersToQuery(query, partnerIds, transactionType, status);
 
                 var reports = await query
                     .OrderByDescending(t => t.Timestamp)
@@ -97,6 +89,30 @@ namespace MAVN.Service.Reporting.MsSqlRepositories.Repositories
 
                 return reports;
             }
+        }
+
+        private IQueryable<TransactionReportEntity> GetQuery(ReportContext context, DateTime from, DateTime to)
+        {
+            return context.TransactionReports
+                .Where(t => from <= t.Timestamp && t.Timestamp <= to);
+        }
+
+        private IQueryable<TransactionReportEntity> AddFiltersToQuery(
+             IQueryable<TransactionReportEntity> query, string[] partnerIds,
+             string transactionType, string status)
+        {
+            var shouldFilterByPartners = partnerIds != null && partnerIds.Any();
+
+            if (shouldFilterByPartners)
+                query = query.Where(t => partnerIds.Contains(t.PartnerId));
+
+            if (transactionType != null)
+                query = query.Where(t => t.TransactionType == transactionType);
+
+            if (status != null)
+                query = query.Where(t => t.Status == status);
+
+            return query;
         }
     }
 }
