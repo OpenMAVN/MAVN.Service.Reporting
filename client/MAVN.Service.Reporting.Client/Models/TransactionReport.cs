@@ -62,5 +62,11 @@ namespace MAVN.Service.Reporting.Client.Models
 
         /// <summary>Currency</summary>
         [CanBeNull] public string Currency { get; set; }
+
+        /// <summary>CampaignId</summary>
+        [CanBeNull] public Guid? CampaignId { get; set; }
+
+        /// <summary>PartnerName</summary>
+        [CanBeNull] public string PartnerName { get; set; }
     }
 }

@@ -29,5 +29,10 @@ namespace MAVN.Service.Reporting.Client.Models
         /// Status
         /// </summary>
         public string Status { get; set; }
+
+        /// <summary>
+        /// CampaingId used for filtering
+        /// </summary>
+        public Guid? CampaignId { get; set; }
     }
 }

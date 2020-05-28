@@ -18,7 +18,8 @@ namespace MAVN.Service.Reporting.Domain.Repositories
             DateTime to,
             string[] partnerIds,
             string transactionType,
-            string status);
+            string status,
+            Guid? campaignId);
 
         Task<IReadOnlyList<TransactionReport>> GetLimitedAsync(
             DateTime from,
@@ -26,6 +27,7 @@ namespace MAVN.Service.Reporting.Domain.Repositories
             int limit,
             string[] partnerIds,
             string transactionType,
-            string status);
+            string status,
+            Guid? campaignId);
     }
 }

@@ -80,6 +80,7 @@ namespace MAVN.Service.Reporting.DomainServices.EventHandlers
                     Info = info,
                     SenderName = $"{sender?.FirstName} {sender?.LastName}",
                     SenderEmail = sender?.Email,
+                    CampaignId = Guid.Parse(msg.CampaignId),
                 }
             );
         }

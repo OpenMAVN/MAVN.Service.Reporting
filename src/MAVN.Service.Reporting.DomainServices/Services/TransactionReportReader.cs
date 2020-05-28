@@ -19,12 +19,13 @@ namespace MAVN.Service.Reporting.DomainServices.Services
 
         public async Task<TransactionReportResult> GetPaginatedAsync(
             int currentPage, int pageSize,
-            DateTime from, DateTime to, string[] partnerIds,
+            DateTime from, DateTime to, string[] partnerIds, Guid? campaignId,
             string transactionType = null, string status = null)
         {
             var (skip, take) = PagingUtils.GetNextPageParameters(currentPage, pageSize);
 
-            var reports = await _transactionReportRepository.GetPaginatedAsync(skip, take, from, to, partnerIds, transactionType, status);
+            var reports = await _transactionReportRepository.GetPaginatedAsync(skip, take, from, to, partnerIds,
+                transactionType, status, campaignId);
 
             return new TransactionReportResult
             {
@@ -36,12 +37,13 @@ namespace MAVN.Service.Reporting.DomainServices.Services
         }
 
         public async Task<IReadOnlyList<TransactionReport>> GetLimitedAsync(
-            DateTime from, DateTime to, int limit, string[] partnerIds,
+            DateTime from, DateTime to, int limit, string[] partnerIds, Guid? campaignId,
             string transactionType = null, string status = null)
         {
             if (limit <= 0) throw new ArgumentException();
 
-            var reports = await _transactionReportRepository.GetLimitedAsync(from, to, limit, partnerIds, transactionType, status);
+            var reports = await _transactionReportRepository.GetLimitedAsync(from, to, limit, partnerIds,
+                transactionType, status, campaignId);
           
             return reports;
         }

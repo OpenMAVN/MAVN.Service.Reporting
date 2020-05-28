@@ -35,5 +35,7 @@ namespace MAVN.Service.Reporting.Domain.Models
         [CanBeNull] public string LocationIntegrationCode { get; set; }
         [CanBeNull] public string PartnerId { get; set; }
         [CanBeNull] public string Currency { get; set; }
+        [CanBeNull] public Guid? CampaignId { get; set; }
+        [CanBeNull] public string PartnerName { get; set; }
     }
 }

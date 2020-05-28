@@ -43,6 +43,7 @@ namespace MAVN.Service.Reporting.DomainServices.EventHandlers
                     SenderName = $"{sender?.FirstName} {sender?.LastName}",
                     SenderEmail = sender?.Email,
                     ReceiverName = ReceiverName,
+                    CampaignId = msg.SpendRuleId,
                 }
             );
         }

@@ -9,11 +9,11 @@ namespace MAVN.Service.Reporting.Domain.Services
     {
         Task<TransactionReportResult> GetPaginatedAsync(
             int currentPage, int pageSize,
-            DateTime from, DateTime to, string[] partnerIds,
+            DateTime from, DateTime to, string[] partnerIds, Guid? campaignId,
             string transactionType = null, string status = null);
 
         Task<IReadOnlyList<TransactionReport>> GetLimitedAsync(
-            DateTime from, DateTime to, int limit, string[] partnerIds,
+            DateTime from, DateTime to, int limit, string[] partnerIds, Guid? campaignId,
             string transactionType = null, string status = null);
     }
 }

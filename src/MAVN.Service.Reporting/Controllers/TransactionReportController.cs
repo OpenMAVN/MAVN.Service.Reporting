@@ -39,7 +39,7 @@ namespace MAVN.Service.Reporting.Controllers
         {
             var result = await _reportReader.GetPaginatedAsync(
                 pagingInfo.CurrentPage, pagingInfo.PageSize,
-                pagingInfo.From, pagingInfo.To, partnerIds,
+                pagingInfo.From, pagingInfo.To, partnerIds, pagingInfo.CampaignId,
                 pagingInfo.TransactionType, pagingInfo.Status);
 
             return _mapper.Map<PaginatedReportResult>(result);
@@ -57,7 +57,7 @@ namespace MAVN.Service.Reporting.Controllers
         {
             var reports = await _reportReader.GetLimitedAsync(
                 pagingInfo.From, pagingInfo.To, Constants.LimitOfReports,
-                partnerIds, pagingInfo.TransactionType, pagingInfo.Status);
+                partnerIds, pagingInfo.CampaignId, pagingInfo.TransactionType, pagingInfo.Status);
             var result = CsvConverter.Run(reports);
 
             return new CsvFileReportResult
