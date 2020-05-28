@@ -41,6 +41,14 @@ namespace MAVN.Service.Reporting.MsSqlRepositories
 
             modelBuilder.Entity<TransactionReportEntity>()
                 .HasIndex(c => c.Timestamp);
+
+            modelBuilder.Entity<TransactionReportEntity>()
+                .HasIndex(c => c.CampaignId)
+                .IsUnique(false);
+
+            modelBuilder.Entity<TransactionReportEntity>()
+                .HasIndex(c => c.PartnerId)
+                .IsUnique(false);
         }
     }
 }

@@ -59,13 +59,13 @@ namespace MAVN.Service.Reporting.Domain.Models
             Map(m => m.PartnerId).Name("Partner Id").Index(i);
             QuotedProperties.TryAdd(i, nameof(TransactionReport.PartnerId));
             i++;
-            Map(m => m.PartnerId).Name("Partner Name").Index(i);
+            Map(m => m.PartnerName).Name("Partner Name").Index(i);
             QuotedProperties.TryAdd(i, nameof(TransactionReport.PartnerName));
             i++;
             Map(m => m.Currency).Index(i);
             QuotedProperties.TryAdd(i, nameof(TransactionReport.Currency));
             i++;
-            Map(m => m.PartnerId).Name("Campaign Id").Index(i);
+            Map(m => m.CampaignId).Name("Campaign Id").Index(i);
             QuotedProperties.TryAdd(i, nameof(TransactionReport.CampaignId));
         }
 
