@@ -113,6 +113,7 @@ namespace MAVN.Service.Reporting.DomainServices.EventHandlers
                     Info = info,
                     ReceiverName = $"{profile.FirstName} {profile.LastName}",
                     ReceiverEmail = profile.Email,
+                    CampaignId = msg.CampaignId,
                 }
             );
         }

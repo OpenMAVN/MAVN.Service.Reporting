@@ -77,5 +77,13 @@ namespace MAVN.Service.Reporting.MsSqlRepositories.Entities
         [Column("currency")]
         [CanBeNull]
         public string Currency { get; set; }
+
+        [Column("campaign_id")]
+        [CanBeNull] 
+        public Guid? CampaignId { get; set; }
+
+        [Column("partner_name")]
+        [CanBeNull] 
+        public string PartnerName { get; set; }
     }
 }

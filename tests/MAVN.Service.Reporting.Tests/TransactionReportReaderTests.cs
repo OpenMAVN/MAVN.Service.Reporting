@@ -27,7 +27,7 @@ namespace MAVN.Service.Reporting.Tests
             var sut = CreateSutInstance();
 
             await Assert.ThrowsAsync<ArgumentException>(
-                () => sut.GetPaginatedAsync(currentPage, pageSize, from, to, null)
+                () => sut.GetPaginatedAsync(currentPage, pageSize, from, to, null, null)
                 );
         }
         
@@ -40,7 +40,7 @@ namespace MAVN.Service.Reporting.Tests
             var sut = CreateSutInstance();
             
             await Assert.ThrowsAsync<ArgumentException>(
-                () => sut.GetLimitedAsync(from, to, limit, null)
+                () => sut.GetLimitedAsync(from, to, limit, null, null)
             );
             
         }
@@ -53,7 +53,7 @@ namespace MAVN.Service.Reporting.Tests
         {
             var sut = CreateSutInstance();
 
-            var reports = await sut.GetLimitedAsync(from, to, limit, null);
+            var reports = await sut.GetLimitedAsync(from, to, limit, null, null);
             
             Assert.Null(reports);
         }

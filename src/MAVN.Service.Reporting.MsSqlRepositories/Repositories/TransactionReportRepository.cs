@@ -52,13 +52,13 @@ namespace MAVN.Service.Reporting.MsSqlRepositories.Repositories
 
         public async Task<IReadOnlyList<TransactionReport>> GetPaginatedAsync(
             int skip, int take, DateTime from, DateTime to, string[] partnerIds,
-            string transactionType, string status)
+            string transactionType, string status, Guid? campaignId)
         {
             using (var context = _contextFactory.CreateDataContext())
             {
                 var query = GetQuery(context, from, to);
 
-                query = AddFiltersToQuery(query, partnerIds, transactionType, status);
+                query = AddFiltersToQuery(query, partnerIds, transactionType, status, campaignId);
 
                 var reports = await query
                     .OrderByDescending(t => t.Timestamp)
@@ -73,13 +73,13 @@ namespace MAVN.Service.Reporting.MsSqlRepositories.Repositories
 
         public async Task<IReadOnlyList<TransactionReport>> GetLimitedAsync(
             DateTime from, DateTime to, int limit, string[] partnerIds,
-            string transactionType, string status)
+            string transactionType, string status, Guid? campaignId)
         {
             using (var context = _contextFactory.CreateDataContext())
             {
                 var query = GetQuery(context, from, to);
 
-                query = AddFiltersToQuery(query, partnerIds, transactionType, status);
+                query = AddFiltersToQuery(query, partnerIds, transactionType, status, campaignId);
 
                 var reports = await query
                     .OrderByDescending(t => t.Timestamp)
@@ -99,7 +99,7 @@ namespace MAVN.Service.Reporting.MsSqlRepositories.Repositories
 
         private IQueryable<TransactionReportEntity> AddFiltersToQuery(
              IQueryable<TransactionReportEntity> query, string[] partnerIds,
-             string transactionType, string status)
+             string transactionType, string status, Guid? campaignId)
         {
             var shouldFilterByPartners = partnerIds != null && partnerIds.Any();
 
@@ -111,6 +111,9 @@ namespace MAVN.Service.Reporting.MsSqlRepositories.Repositories
 
             if (!string.IsNullOrEmpty(status))
                 query = query.Where(t => t.Status == status);
+
+            if (campaignId.HasValue)
+                query = query.Where(t => t.CampaignId == campaignId);
 
             return query;
         }

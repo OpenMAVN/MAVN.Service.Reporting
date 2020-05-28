@@ -53,6 +53,8 @@ namespace MAVN.Service.Reporting.DomainServices.EventHandlers
                 SenderName = $"{customer?.FirstName} {customer?.LastName}",
                 CampaignName = campaign?.Name,
                 Status = VoucherStatus,
+                CampaignId = message.CampaignId,
+                PartnerName = partner?.Name,
             });
         }
     }

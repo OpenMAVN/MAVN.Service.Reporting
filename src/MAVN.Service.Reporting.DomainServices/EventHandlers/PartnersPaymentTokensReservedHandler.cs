@@ -73,6 +73,7 @@ namespace MAVN.Service.Reporting.DomainServices.EventHandlers
                     ReceiverName = partnerName,
                     LocationInfo = location?.Name,
                     LocationExternalId = location?.ExternalId,
+                    PartnerName = partnerName,
                 }
             );
         }
