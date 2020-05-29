@@ -52,4 +52,3 @@ namespace MAVN.Service.Reporting.DomainServices.EventHandlers
         }
     }
 }
-
