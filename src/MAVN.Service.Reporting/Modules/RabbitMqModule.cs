@@ -107,6 +107,10 @@ namespace MAVN.Service.Reporting.Modules
             builder.RegisterType<SmartVoucherSoldHandler>()
                 .As<IEventHandler<SmartVoucherSoldEvent>>()
                 .SingleInstance();
+
+            builder.RegisterType<SmartVoucherUsedHandler>()
+                .As<IEventHandler<SmartVoucherUsedEvent>>()
+                .SingleInstance();
         }
 
         private void RegisterRabbitMqSubscribers(ContainerBuilder builder)
