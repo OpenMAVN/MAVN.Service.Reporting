@@ -17,13 +17,20 @@ namespace MAVN.Service.Reporting.DomainServices.EventHandlers
         private const string VoucherStatus = "Used";
 
         private readonly ITransactionReportRepository _reportHelper;
-        private readonly IPartnerManagementClient _partnerManagementClient;
+        public readonly IPartnerManagementClient _partnerManagementClient;
         private readonly ICustomerProfileClient _customerProfileClient;
         private readonly ISmartVouchersClient _smartVouchersClient;
 
-        public SmartVoucherUsedHandler(ITransactionReportRepository reportHelper)
+        public SmartVoucherUsedHandler(
+            ITransactionReportRepository reportHelper, 
+            IPartnerManagementClient partnerManagementClient,
+            ICustomerProfileClient customerProfileClient, 
+            ISmartVouchersClient smartVouchersClient)
         {
             _reportHelper = reportHelper;
+            _partnerManagementClient = partnerManagementClient;
+            _customerProfileClient = customerProfileClient;
+            _smartVouchersClient = smartVouchersClient;
         }
 
         public async Task HandleAsync(SmartVoucherUsedEvent message)
