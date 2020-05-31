@@ -1,6 +1,6 @@
-using System.Data.Common;
+﻿using System.Data.Common;
 using JetBrains.Annotations;
-using Lykke.Common.MsSql;
+using MAVN.Common.MsSql;
 using MAVN.Service.Reporting.MsSqlRepositories.Entities;
 using Microsoft.EntityFrameworkCore;
 
@@ -41,6 +41,14 @@ namespace MAVN.Service.Reporting.MsSqlRepositories
 
             modelBuilder.Entity<TransactionReportEntity>()
                 .HasIndex(c => c.Timestamp);
+
+            modelBuilder.Entity<TransactionReportEntity>()
+                .HasIndex(c => c.CampaignId)
+                .IsUnique(false);
+
+            modelBuilder.Entity<TransactionReportEntity>()
+                .HasIndex(c => c.PartnerId)
+                .IsUnique(false);
         }
     }
 }

@@ -1,7 +1,7 @@
-using System;
+﻿using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using Falcon.Numerics;
+using MAVN.Numerics;
 using JetBrains.Annotations;
 
 namespace MAVN.Service.Reporting.MsSqlRepositories.Entities
@@ -69,5 +69,21 @@ namespace MAVN.Service.Reporting.MsSqlRepositories.Entities
         [Column("location_integration_code")]
         [CanBeNull]
         public string LocationIntegrationCode { get; set; }
+
+        [Column("partner_id")]
+        [CanBeNull]
+        public string PartnerId { get; set; }
+
+        [Column("currency")]
+        [CanBeNull]
+        public string Currency { get; set; }
+
+        [Column("campaign_id")]
+        [CanBeNull] 
+        public Guid? CampaignId { get; set; }
+
+        [Column("partner_name")]
+        [CanBeNull] 
+        public string PartnerName { get; set; }
     }
 }

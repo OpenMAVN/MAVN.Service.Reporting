@@ -1,5 +1,5 @@
-using System;
-using Falcon.Numerics;
+﻿using System;
+using MAVN.Numerics;
 using JetBrains.Annotations;
 
 namespace MAVN.Service.Reporting.Client.Models
@@ -56,5 +56,17 @@ namespace MAVN.Service.Reporting.Client.Models
 
         /// <summary>Location integration code</summary>
         [CanBeNull] public string LocationIntegrationCode { get; set; }
+
+        /// <summary>Partner Id</summary>
+        [CanBeNull] public string PartnerId { get; set; }
+
+        /// <summary>Currency</summary>
+        [CanBeNull] public string Currency { get; set; }
+
+        /// <summary>CampaignId</summary>
+        [CanBeNull] public Guid? CampaignId { get; set; }
+
+        /// <summary>PartnerName</summary>
+        [CanBeNull] public string PartnerName { get; set; }
     }
 }

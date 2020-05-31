@@ -4,14 +4,16 @@ using MAVN.Service.Reporting.MsSqlRepositories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace MAVN.Service.Reporting.MsSqlRepositories.Migrations
 {
     [DbContext(typeof(ReportContext))]
-    partial class ReportContextModelSnapshot : ModelSnapshot
+    [Migration("20200507105027_AddPartnerIdAndCurrency")]
+    partial class AddPartnerIdAndCurrency
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -29,9 +31,6 @@ namespace MAVN.Service.Reporting.MsSqlRepositories.Migrations
                     b.Property<string>("Amount")
                         .IsRequired()
                         .HasColumnName("amount");
-
-                    b.Property<Guid?>("CampaignId")
-                        .HasColumnName("campaign_id");
 
                     b.Property<string>("CampaignName")
                         .HasColumnName("campaign_name");
@@ -53,9 +52,6 @@ namespace MAVN.Service.Reporting.MsSqlRepositories.Migrations
 
                     b.Property<string>("PartnerId")
                         .HasColumnName("partner_id");
-
-                    b.Property<string>("PartnerName")
-                        .HasColumnName("partner_name");
 
                     b.Property<string>("ReceiverEmail")
                         .HasColumnName("receiver_email");
@@ -85,10 +81,6 @@ namespace MAVN.Service.Reporting.MsSqlRepositories.Migrations
                         .HasColumnName("vertical");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("CampaignId");
-
-                    b.HasIndex("PartnerId");
 
                     b.HasIndex("Timestamp");
 

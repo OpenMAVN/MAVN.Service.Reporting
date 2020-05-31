@@ -5,11 +5,12 @@
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="CsvHelper" Version="14.0.0" />
-    <PackageReference Include="Falcon.Service.CrossChainTransfers.Contract" Version="2.2.0" />
-    <PackageReference Include="Falcon.Service.PartnersPayments.Contract" Version="1.6.1" />
-    <PackageReference Include="Falcon.Service.PaymentTransfers.Contract" Version="1.4.0" />
-    <PackageReference Include="Falcon.Service.Staking.Contract" Version="1.1.0" />
-    <PackageReference Include="Falcon.Service.WalletManagement.Contract" Version="3.8.0" />
     <PackageReference Include="Lykke.Common" Version="7.5.0" />
+    <PackageReference Include="MAVN.Numerics" Version="1.0.0" />
+    <PackageReference Include="MAVN.Service.CrossChainTransfers.Contract" Version="1.1.0" />
+    <PackageReference Include="MAVN.Service.PartnersPayments.Contract" Version="1.1.0" />
+    <PackageReference Include="MAVN.Service.SmartVouchers.Contract" Version="2.4.0" />
+    <PackageReference Include="MAVN.Service.Staking.Contract" Version="1.1.1" />
+    <PackageReference Include="MAVN.Service.WalletManagement.Contract" Version="1.1.1" />
   </ItemGroup>
 </Project>

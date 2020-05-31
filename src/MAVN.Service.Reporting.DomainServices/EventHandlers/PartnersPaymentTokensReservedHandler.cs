@@ -1,12 +1,12 @@
-using System;
+﻿using System;
 using System.Linq;
 using System.Threading.Tasks;
 using Common.Log;
 using Lykke.Common.Log;
-using Lykke.Service.CustomerProfile.Client;
-using Lykke.Service.PartnerManagement.Client;
-using Lykke.Service.PartnerManagement.Client.Models.Location;
-using Lykke.Service.PartnersPayments.Contract;
+using MAVN.Service.CustomerProfile.Client;
+using MAVN.Service.PartnerManagement.Client;
+using MAVN.Service.PartnerManagement.Client.Models.Location;
+using MAVN.Service.PartnersPayments.Contract;
 using MAVN.Service.Reporting.Domain;
 using MAVN.Service.Reporting.Domain.Models;
 using MAVN.Service.Reporting.Domain.Repositories;
@@ -73,7 +73,7 @@ namespace MAVN.Service.Reporting.DomainServices.EventHandlers
                     ReceiverName = partnerName,
                     LocationInfo = location?.Name,
                     LocationExternalId = location?.ExternalId,
-                    LocationIntegrationCode = location?.AccountingIntegrationCode,
+                    PartnerName = partnerName,
                 }
             );
         }

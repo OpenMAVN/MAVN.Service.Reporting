@@ -19,10 +19,8 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="7.0.0" />
-    <PackageReference Include="Falcon.Job.QuorumTransactionWatcher.Contract" Version="4.8.0" />
-    <PackageReference Include="Falcon.Service.CustomerManagement.Client" Version="8.5.0" />
-    <PackageReference Include="Falcon.Service.CustomerProfile.Client" Version="7.7.0" />
     <PackageReference Include="Lykke.Sdk" Version="5.17.0" />
+    <PackageReference Include="MAVN.Job.QuorumTransactionWatcher.Contract" Version="1.1.0" />
     <PackageReference Include="Microsoft.ApplicationInsights.AspNetCore" Version="2.13.1" />
   </ItemGroup>
   <ItemGroup>

@@ -1,7 +1,7 @@
-using System;
+﻿using System;
 using System.Threading.Tasks;
-using Lykke.Service.CrossChainTransfers.Contract;
-using Lykke.Service.CustomerProfile.Client;
+using MAVN.Service.CrossChainTransfers.Contract;
+using MAVN.Service.CustomerProfile.Client;
 using MAVN.Service.Reporting.Domain;
 using MAVN.Service.Reporting.Domain.Models;
 using MAVN.Service.Reporting.Domain.Repositories;

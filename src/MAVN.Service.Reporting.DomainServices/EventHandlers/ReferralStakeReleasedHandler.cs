@@ -1,15 +1,15 @@
-using System;
+﻿using System;
 using System.Linq;
 using System.Threading.Tasks;
 using Common.Log;
 using Lykke.Common.Log;
-using Lykke.Service.Campaign.Client;
-using Lykke.Service.Campaign.Client.Models.Enums;
-using Lykke.Service.CustomerProfile.Client;
+using MAVN.Service.Campaign.Client;
+using MAVN.Service.Campaign.Client.Models.Enums;
+using MAVN.Service.CustomerProfile.Client;
 using MAVN.Service.Reporting.Domain.Models;
 using MAVN.Service.Reporting.Domain.Repositories;
 using MAVN.Service.Reporting.Domain.Services;
-using Lykke.Service.Staking.Contract.Events;
+using MAVN.Service.Staking.Contract.Events;
 
 namespace MAVN.Service.Reporting.DomainServices.EventHandlers
 {
@@ -78,6 +78,7 @@ namespace MAVN.Service.Reporting.DomainServices.EventHandlers
                     Info = info,
                     SenderName = $"{sender?.FirstName} {sender?.LastName}",
                     SenderEmail = sender?.Email,
+                    CampaignId = Guid.Parse(msg.CampaignId),
                 }
             );
         }

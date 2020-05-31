@@ -1,8 +1,8 @@
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using MAVN.Service.Reporting.Domain;
 using MAVN.Service.Reporting.Domain.Repositories;
 using MAVN.Service.Reporting.Domain.Services;
-using Lykke.Service.WalletManagement.Contract.Events;
+using MAVN.Service.WalletManagement.Contract.Events;
 
 namespace MAVN.Service.Reporting.DomainServices.EventHandlers
 {

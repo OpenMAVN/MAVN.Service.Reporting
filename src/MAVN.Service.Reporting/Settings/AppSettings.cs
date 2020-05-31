@@ -1,8 +1,9 @@
-using JetBrains.Annotations;
+﻿using JetBrains.Annotations;
 using Lykke.Sdk.Settings;
-using Lykke.Service.Campaign.Client;
-using Lykke.Service.CustomerProfile.Client;
-using Lykke.Service.PartnerManagement.Client;
+using MAVN.Service.Campaign.Client;
+using MAVN.Service.CustomerProfile.Client;
+using MAVN.Service.PartnerManagement.Client;
+using MAVN.Service.SmartVouchers.Client;
 
 namespace MAVN.Service.Reporting.Settings
 {
@@ -16,5 +17,7 @@ namespace MAVN.Service.Reporting.Settings
         public PartnerManagementServiceClientSettings PartnerManagementService { get; set; }
 
         public CampaignServiceClientSettings CampaignService { get; set; }
+
+        public SmartVouchersServiceClientSettings SmartVouchersService { get; set; }
     }
 }

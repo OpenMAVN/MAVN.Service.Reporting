@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using CsvHelper.Configuration;
 
 namespace MAVN.Service.Reporting.Domain.Models
@@ -55,6 +55,18 @@ namespace MAVN.Service.Reporting.Domain.Models
             i++;
             Map(m => m.TransactionCategory).Name("Transaction Category").Index(i);
             QuotedProperties.TryAdd(i, nameof(TransactionReport.TransactionCategory));
+            i++;
+            Map(m => m.PartnerId).Name("Partner Id").Index(i);
+            QuotedProperties.TryAdd(i, nameof(TransactionReport.PartnerId));
+            i++;
+            Map(m => m.PartnerName).Name("Partner Name").Index(i);
+            QuotedProperties.TryAdd(i, nameof(TransactionReport.PartnerName));
+            i++;
+            Map(m => m.Currency).Index(i);
+            QuotedProperties.TryAdd(i, nameof(TransactionReport.Currency));
+            i++;
+            Map(m => m.CampaignId).Name("Campaign Id").Index(i);
+            QuotedProperties.TryAdd(i, nameof(TransactionReport.CampaignId));
         }
 
         public bool ShouldQuote(int propertyIndex)
