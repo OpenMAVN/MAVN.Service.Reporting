@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 
 namespace MAVN.Service.Reporting.DomainServices.Utils
 {
@@ -7,7 +7,7 @@ namespace MAVN.Service.Reporting.DomainServices.Utils
         public static (int skip, int take) GetNextPageParameters(int currentPage, int pageSize)
         {
             if (currentPage < 1)
-                throw new ArgumentException("Current page can't be negative", nameof(currentPage));
+                throw new ArgumentException("Current page has to be greater than 0", nameof(currentPage));
 
             if (pageSize < 1)
                 throw new ArgumentException("Page size has to be greater than 0", nameof(pageSize));
