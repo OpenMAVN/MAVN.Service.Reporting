@@ -48,7 +48,7 @@ namespace MAVN.Service.Reporting.Controllers
         /// <summary>
         /// Get Csv file of transaction infos
         /// </summary>
-        /// <param name="pagingInfo"></param>
+        /// <param name="model"></param>
         /// <returns></returns>
         [HttpGet("report/csv")]
         [ProducesResponseType(typeof(CsvFileReportResult), (int)HttpStatusCode.OK)]
