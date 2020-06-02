@@ -48,16 +48,15 @@ namespace MAVN.Service.Reporting.Controllers
         /// <summary>
         /// Get Csv file of transaction infos
         /// </summary>
-        /// <param name="pagingInfo"></param>
-        /// <param name="partnerIds"></param>
+        /// <param name="model"></param>
         /// <returns></returns>
         [HttpGet("report/csv")]
         [ProducesResponseType(typeof(CsvFileReportResult), (int)HttpStatusCode.OK)]
-        public async Task<CsvFileReportResult> FetchReportCsvAsync([FromQuery] TransactionReportByTimeRequest pagingInfo, [FromQuery] string[] partnerIds)
+        public async Task<CsvFileReportResult> FetchReportCsvAsync([FromQuery] FetchReportCsvRequest model)
         {
             var reports = await _reportReader.GetLimitedAsync(
-                pagingInfo.From, pagingInfo.To, Constants.LimitOfReports,
-                partnerIds, pagingInfo.CampaignId, pagingInfo.TransactionType, pagingInfo.Status);
+                model.From, model.To, Constants.LimitOfReports,
+                model.PartnerIds, model.CampaignId, model.TransactionType, model.Status);
             var result = CsvConverter.Run(reports);
 
             return new CsvFileReportResult
