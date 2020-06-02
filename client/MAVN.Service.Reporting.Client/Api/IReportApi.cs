@@ -1,6 +1,4 @@
-﻿using System;
-using System.ComponentModel.DataAnnotations;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using JetBrains.Annotations;
 using MAVN.Service.Reporting.Client.Models;
 using Refit;
@@ -26,10 +24,9 @@ namespace MAVN.Service.Reporting.Client.Api
         /// <summary>
         /// Csv Report for transactions
         /// </summary>
-        /// <param name="pagingInfo"></param>
-        /// <param name="partnerIds"></param>
+        /// <param name="model"></param>
         /// <returns></returns>
         [Get("/api/report/csv")]
-        Task<CsvFileReportResult> FetchReportCsvAsync([Query] TransactionReportByTimeRequest pagingInfo, [Query(CollectionFormat.Multi)] string[] partnerIds);
+        Task<CsvFileReportResult> FetchReportCsvAsync([Query] FetchReportCsvRequest model);
     }
 }
