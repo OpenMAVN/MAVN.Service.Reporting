@@ -3,6 +3,9 @@ using System.ComponentModel.DataAnnotations;
 
 namespace MAVN.Service.Reporting.Client.Models
 {
+    /// <summary>
+    /// Holds filtering information for FetchReportCsv request
+    /// </summary>
     public class FetchReportCsvRequest
     {
         /// <summary>
