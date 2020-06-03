@@ -13,7 +13,7 @@ namespace MAVN.Service.Reporting.DomainServices.EventHandlers
 {
     public class SmartVoucherUsedHandler : IEventHandler<SmartVoucherUsedEvent>
     {
-        private const string TxType = "Smart Voucher";
+        private const string TxType = "Voucher Redeemed";
         private const string VoucherStatus = "Used";
 
         private readonly ITransactionReportRepository _reportHelper;

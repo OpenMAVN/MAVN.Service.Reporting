@@ -12,7 +12,7 @@ namespace MAVN.Service.Reporting.DomainServices.EventHandlers
 {
     public class SmartVoucherSoldHandler : IEventHandler<SmartVoucherSoldEvent>
     {
-        private const string TxType = "Smart Voucher";
+        private const string TxType = "Voucher Bought";
         private const string VoucherStatus = "Sold";
 
         private readonly ITransactionReportRepository _reportHelper;
@@ -55,6 +55,7 @@ namespace MAVN.Service.Reporting.DomainServices.EventHandlers
                 Status = VoucherStatus,
                 CampaignId = message.CampaignId,
                 PartnerName = partner?.Name,
+                ReceiverName = partner?.Name,
             });
         }
     }
