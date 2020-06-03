@@ -34,6 +34,8 @@ namespace MAVN.Service.Reporting.Modules
         private const string ReferralStakeReleasedExchange = "lykke.wallet.referralstakereleased";
         private const string ReferralStakeBurntExchange = "lykke.wallet.referralstakeburnt";
         private const string SmartVoucherSoldExchange = "lykke.smart-vouchers.vouchersold";
+        private const string SmartVoucherUsedExchange = "lykke.smart-vouchers.voucherused";
+        private const string SmartVoucherTransferredExchange = "lykke.smart-vouchers.vouchertransferred";
 
         private readonly string _connString;
         private readonly bool _isPublicBlockchainFeatureDisabled;
@@ -110,6 +112,10 @@ namespace MAVN.Service.Reporting.Modules
 
             builder.RegisterType<SmartVoucherUsedHandler>()
                 .As<IEventHandler<SmartVoucherUsedEvent>>()
+                .SingleInstance();
+
+            builder.RegisterType<SmartVoucherTransferredHandler>()
+                .As<IEventHandler<SmartVoucherTransferredEvent>>()
                 .SingleInstance();
         }
 
@@ -190,6 +196,20 @@ namespace MAVN.Service.Reporting.Modules
                 .SingleInstance()
                 .WithParameter("connectionString", _connString)
                 .WithParameter("exchangeName", SmartVoucherSoldExchange)
+                .WithParameter("queueName", DefaultQueueName);
+
+            builder.RegisterType<RabbitSubscriber<SmartVoucherUsedEvent>>()
+                .As<IStartStop>()
+                .SingleInstance()
+                .WithParameter("connectionString", _connString)
+                .WithParameter("exchangeName", SmartVoucherUsedExchange)
+                .WithParameter("queueName", DefaultQueueName);
+
+            builder.RegisterType<RabbitSubscriber<SmartVoucherTransferredEvent>>()
+                .As<IStartStop>()
+                .SingleInstance()
+                .WithParameter("connectionString", _connString)
+                .WithParameter("exchangeName", SmartVoucherTransferredExchange)
                 .WithParameter("queueName", DefaultQueueName);
 
             if (!_isPublicBlockchainFeatureDisabled)
