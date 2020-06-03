@@ -11,20 +11,20 @@ using MAVN.Service.SmartVouchers.Contract;
 
 namespace MAVN.Service.Reporting.DomainServices.EventHandlers
 {
-    public class SmartVoucherUsedHandler : IEventHandler<SmartVoucherUsedEvent>
+    public class SmartVoucherTransferredHandler : IEventHandler<SmartVoucherTransferredEvent>
     {
-        private const string TxType = "Voucher Redeemed";
-        private const string VoucherStatus = "Used";
+        private const string TxType = "Voucher Transferred";
+        private const string VoucherStatus = "Transferred";
 
         private readonly ITransactionReportRepository _reportHelper;
         private readonly IPartnerManagementClient _partnerManagementClient;
         private readonly ICustomerProfileClient _customerProfileClient;
         private readonly ISmartVouchersClient _smartVouchersClient;
 
-        public SmartVoucherUsedHandler(
-            ITransactionReportRepository reportHelper, 
+        public SmartVoucherTransferredHandler(
+            ITransactionReportRepository reportHelper,
             IPartnerManagementClient partnerManagementClient,
-            ICustomerProfileClient customerProfileClient, 
+            ICustomerProfileClient customerProfileClient,
             ISmartVouchersClient smartVouchersClient)
         {
             _reportHelper = reportHelper;
@@ -33,14 +33,18 @@ namespace MAVN.Service.Reporting.DomainServices.EventHandlers
             _smartVouchersClient = smartVouchersClient;
         }
 
-        public async Task HandleAsync(SmartVoucherUsedEvent message)
+        public async Task HandleAsync(SmartVoucherTransferredEvent message)
         {
             var partner = await _partnerManagementClient.Partners.GetByIdAsync(message.PartnerId);
-            var customer =
-                (await _customerProfileClient.CustomerProfiles.GetByCustomerIdAsync(message.CustomerId.ToString(), true, true))?.Profile;
+            var senderCustomer =
+                (await _customerProfileClient.CustomerProfiles.GetByCustomerIdAsync(message.OldCustomerId.ToString(),
+                    true, true))?.Profile;
+            var receiverCustomer =
+                (await _customerProfileClient.CustomerProfiles.GetByCustomerIdAsync(message.NewCustomerId.ToString(),
+                    true, true))?.Profile;
             var campaign = await _smartVouchersClient.CampaignsApi.GetByIdAsync(message.CampaignId);
 
-            await _reportHelper.AddAsync(new TransactionReport()
+            await _reportHelper.AddAsync(new TransactionReport
             {
                 Amount = Money18.Create(message.Amount),
                 Id = Guid.NewGuid().ToString(),
@@ -52,8 +56,10 @@ namespace MAVN.Service.Reporting.DomainServices.EventHandlers
                 Status = VoucherStatus,
                 CampaignId = message.CampaignId,
                 Vertical = partner.BusinessVertical?.ToString(),
-                SenderEmail = customer?.Email,
-                SenderName = $"{customer?.FirstName} {customer?.LastName}",
+                SenderEmail = senderCustomer?.Email,
+                SenderName = $"{senderCustomer?.FirstName} {senderCustomer?.LastName}",
+                ReceiverEmail = receiverCustomer?.Email,
+                ReceiverName = $"{receiverCustomer?.FirstName} {receiverCustomer?.LastName}",
                 PartnerName = partner?.Name,
             });
         }
