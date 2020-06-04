@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Linq;
+using System.Threading.Tasks;
 using MAVN.Numerics;
 using MAVN.Service.PartnerManagement.Client;
 using MAVN.Service.CustomerProfile.Client;
@@ -38,6 +39,7 @@ namespace MAVN.Service.Reporting.DomainServices.EventHandlers
             var customer =
                 (await _customerProfileClient.CustomerProfiles.GetByCustomerIdAsync(message.CustomerId.ToString(), true, true))?.Profile;
             var campaign = await _smartVouchersClient.CampaignsApi.GetByIdAsync(message.CampaignId);
+            var receiverEmail = partner.Locations.Count == 1 ? partner.Locations.First()?.ContactPerson?.Email : null;
 
             await _reportHelper.AddAsync(new TransactionReport
             {
@@ -56,6 +58,7 @@ namespace MAVN.Service.Reporting.DomainServices.EventHandlers
                 CampaignId = message.CampaignId,
                 PartnerName = partner?.Name,
                 ReceiverName = partner?.Name,
+                ReceiverEmail = receiverEmail,
             });
         }
     }
