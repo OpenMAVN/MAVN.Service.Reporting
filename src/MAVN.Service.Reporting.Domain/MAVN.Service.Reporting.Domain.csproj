@@ -9,7 +9,7 @@
     <PackageReference Include="MAVN.Numerics" Version="1.0.0" />
     <PackageReference Include="MAVN.Service.CrossChainTransfers.Contract" Version="1.1.0" />
     <PackageReference Include="MAVN.Service.PartnersPayments.Contract" Version="1.1.0" />
-    <PackageReference Include="MAVN.Service.SmartVouchers.Contract" Version="2.11.0" />
+    <PackageReference Include="MAVN.Service.SmartVouchers.Contract" Version="2.15.0" />
     <PackageReference Include="MAVN.Service.Staking.Contract" Version="1.1.1" />
     <PackageReference Include="MAVN.Service.WalletManagement.Contract" Version="1.1.1" />
   </ItemGroup>

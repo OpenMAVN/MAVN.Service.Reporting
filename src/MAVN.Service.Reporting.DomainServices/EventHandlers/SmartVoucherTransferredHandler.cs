@@ -61,6 +61,7 @@ namespace MAVN.Service.Reporting.DomainServices.EventHandlers
                 ReceiverEmail = receiverCustomer?.Email,
                 ReceiverName = $"{receiverCustomer?.FirstName} {receiverCustomer?.LastName}",
                 PartnerName = partner?.Name,
+                Info = message.VoucherShortCode,
             });
         }
     }
