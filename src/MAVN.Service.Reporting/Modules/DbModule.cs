@@ -1,11 +1,11 @@
 ﻿using Autofac;
 using JetBrains.Annotations;
-using MAVN.Common.MsSql;
 using MAVN.Service.Reporting.Domain.Repositories;
 using MAVN.Service.Reporting.MsSqlRepositories;
 using MAVN.Service.Reporting.MsSqlRepositories.Repositories;
 using MAVN.Service.Reporting.Settings;
 using Lykke.SettingsReader;
+using MAVN.Persistence.PostgreSQL.Legacy;
 
 namespace MAVN.Service.Reporting.Modules
 {
@@ -21,7 +21,7 @@ namespace MAVN.Service.Reporting.Modules
 
         protected override void Load(ContainerBuilder builder)
         {
-            builder.RegisterMsSql(
+            builder.RegisterPostgreSQL(
                 _connectionString,
                 connString => new ReportContext(connString, false),
                 dbConn => new ReportContext(dbConn));

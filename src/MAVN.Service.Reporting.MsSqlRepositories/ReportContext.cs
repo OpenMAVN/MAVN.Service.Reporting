@@ -1,12 +1,12 @@
 ﻿using System.Data.Common;
 using JetBrains.Annotations;
-using MAVN.Common.MsSql;
+using MAVN.Persistence.PostgreSQL.Legacy;
 using MAVN.Service.Reporting.MsSqlRepositories.Entities;
 using Microsoft.EntityFrameworkCore;
 
 namespace MAVN.Service.Reporting.MsSqlRepositories
 {
-    public class ReportContext : MsSqlContext
+    public class ReportContext : PostgreSQLContext
     {
         private const string Schema = "report"; // TODO put proper schema name here
 
@@ -35,7 +35,7 @@ namespace MAVN.Service.Reporting.MsSqlRepositories
         {
         }
 
-        protected override void OnLykkeModelCreating(ModelBuilder modelBuilder)
+        protected override void OnMAVNModelCreating(ModelBuilder modelBuilder)
         {
             // TODO put db entities models building code here
 
