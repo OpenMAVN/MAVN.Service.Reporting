@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
-using MAVN.Common.MsSql;
+using MAVN.Persistence.PostgreSQL.Legacy;
 using MAVN.Service.Reporting.Domain;
 using MAVN.Service.Reporting.Domain.Models;
 using MAVN.Service.Reporting.Domain.Repositories;
@@ -14,11 +14,11 @@ namespace MAVN.Service.Reporting.MsSqlRepositories.Repositories
 {
     public class TransactionReportRepository : ITransactionReportRepository
     {
-        private readonly MsSqlContextFactory<ReportContext> _contextFactory;
+        private readonly PostgreSQLContextFactory<ReportContext> _contextFactory;
         private readonly IMapper _mapper;
 
         public TransactionReportRepository(
-            MsSqlContextFactory<ReportContext> contextFactory,
+            PostgreSQLContextFactory<ReportContext> contextFactory,
             IMapper mapper
         )
         {
