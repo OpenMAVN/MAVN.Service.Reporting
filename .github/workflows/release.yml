@@ -18,7 +18,7 @@ env:
   SERVICE_DOCKER_IMAGE: reporting-service
   SERVICE_PROJECT: ./src/MAVN.Service.Reporting/MAVN.Service.Reporting.csproj
     
-  
+  ACTIONS_ALLOW_UNSECURE_COMMANDS: true
         
 jobs:
   publish-release:
