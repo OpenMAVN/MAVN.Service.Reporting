@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
+using Refit;
 
 namespace MAVN.Service.Reporting.Client.Models
 {
@@ -38,6 +39,7 @@ namespace MAVN.Service.Reporting.Client.Models
         /// <summary>
         /// Partner Ids used for filtering
         /// </summary>
+        [Query(CollectionFormat.Multi)]
         public string[] PartnerIds { get; set; }
     }
 }
